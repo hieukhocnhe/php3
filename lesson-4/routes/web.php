@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\BookController;
 use App\Livewire\Counter;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -59,6 +60,22 @@ use Illuminate\Support\Facades\Route;
 //     return view('post-list', compact('posts'));
 // });
 
-Route::prefix('category')->group(function() {
-    Route::get('/list', [CategoryController::class, 'index'])->name('category.index');
-});
+// Route::prefix('category')->group(function() {
+//     Route::get('/list', [CategoryController::class, 'index'])->name('category.index');
+// });
+
+Route::get('/', [BookController::class, 'index'])->name('books.index');
+
+Route::get('/create', [BookController::class, 'create'])->name('book.create');
+
+Route::post('/create', [BookController::class, 'store'])->name('book.store');
+
+Route::get('/edit/{id}', [BookController::class, 'edit'])->name('book.edit');
+
+Route::put('/edit/{id}', [BookController::class, 'update'])->name('book.update');
+
+Route::get('/delete/{id}', [BookController::class, 'destroy'])->name('book.destroy');
+
+
+
+
