@@ -1,36 +1,37 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use App\Livewire\Counter;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('home', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+// Route::get('home', function () {
+//     return view('home');
+// });
 
 // Route::get('product/{id}', function ($id) {
 //     return "Product id : $id";
 // })->where('id','[0-9]+');
 
-Route::view('about', 'about')->name('page.about');
+// Route::view('about', 'about')->name('page.about');
 
-Route::get('/user/{id}/comment/{comment_id?}', function ($id, $comment_id = null) {
-    return "User id : $id - Comment id : $comment_id";
-});
+// Route::get('/user/{id}/comment/{comment_id?}', function ($id, $comment_id = null) {
+//     return "User id : $id - Comment id : $comment_id";
+// });
 
-Route::prefix('admin')->group(function () {
-    Route::get('products', function () {
-        return "Products";
-    });
-    Route::get('users', function () {
-        return "Users";
-    });
-});
+// Route::prefix('admin')->group(function () {
+//     Route::get('products', function () {
+//         return "Products";
+//     });
+//     Route::get('users', function () {
+//         return "Users";
+//     });
+// });
 
-Route::get('/counter', Counter::class);
+// Route::get('/counter', Counter::class);
 
 // //Cập nhật
 // DB::table('posts')->where('id', '=', 1)->update([
@@ -53,7 +54,11 @@ Route::get('/counter', Counter::class);
 //     ->get();
 // dd($posts);
 
-Route::get('/post-list', function () {
-    $posts = DB::table('posts')->limit(10)->get();
-    return view('post-list', compact('posts'));
+// Route::get('/post-list', function () {
+//     $posts = DB::table('posts')->limit(10)->get();
+//     return view('post-list', compact('posts'));
+// });
+
+Route::prefix('category')->group(function() {
+    Route::get('/list', [CategoryController::class, 'index'])->name('category.index');
 });
